@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 
-/*
+/**
 * newNode - creates a new node
 * 
 * Return: return the new node
@@ -32,7 +32,8 @@ avl_t *arrayToAVL(avl_t *root, int *array, size_t start, size_t end)
 	avl_t *lft, *rgt;
 
 	/*
-	printf("start = %u, end = %u\n", (unsigned)start, (unsigned)end);
+	* printf("start = %u, end = %u\n",
+	*  (unsigned)start, (unsigned)end);
 	*/
 	mid = (start + end) / 2;
 	data = array[mid];
@@ -45,11 +46,11 @@ avl_t *arrayToAVL(avl_t *root, int *array, size_t start, size_t end)
 		rgt->parent = root;
 		root->left = arrayToAVL(lft, array, start, mid - 1);
 		/*
-		printf("%d\n", root->left->n);
+		* printf("%d\n", root->left->n);
 		*/
 		root->right = arrayToAVL(rgt, array, mid + 1, end);
 		/*
-		printf("%d\n", root->right->n);
+		* printf("%d\n", root->right->n);
 		*/
 	}
 	else if (mid + 1 == end)
@@ -76,4 +77,3 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	root = newNode();
 	return (arrayToAVL(root, array, 0, size - 1));
 }
-
