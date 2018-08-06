@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 from sys import argv, exit
 
 
@@ -19,6 +20,7 @@ def search(left, right, mid, idx, arr):
                     search(left, right, mid, idx + 1, l)
                     left[i] = right[i] = mid[i] = 0
 
+
 def queen(ar, q):
     """
     n queens algorithm 
@@ -26,8 +28,10 @@ def queen(ar, q):
     search([0] * ar, [0] * ar, [0] * ar, 0, [])
     return q
 
+
 if len(argv) is not 2:
     print("Usage: nqueens N")
+    exit(1)
 elif argv[1].isdigit() is False:
     print("N must be a number")
     exit(1)
