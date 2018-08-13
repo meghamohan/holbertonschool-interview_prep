@@ -1,5 +1,6 @@
 #include "search_algos.h"
 
+
 /**
  * print_array - print the array
  * @array: array to print
@@ -15,6 +16,7 @@ void print_array(int *array, int start, int stop)
 		printf("%d, ", array[i]);
 	printf("%d\n", array[i]);
 }
+
 
 /**
  * binary_search - binary search helper for recursion
@@ -36,8 +38,14 @@ int binary_search(int *array, int start, int stop, int value)
 		return (start);
 	if (array[mid] > value)
 		return (binary_search(array, start, mid, value));
-	return (binary_search(array, mid, stop, value));
+	if (array[mid] < value)
+		return (binary_search(array, mid, stop, value));
+	if (array[mid] == value) 
+		return (mid);
+	return (-1);
 }
+
+
 /**
  * advanced_binary - binary search using recursion
  * @array: array
