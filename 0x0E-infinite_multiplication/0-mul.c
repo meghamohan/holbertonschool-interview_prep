@@ -54,6 +54,51 @@ void myPrint(char *s)
 }
 
 /**
+* multiply - multplication main function
+* @a: number 1
+* @b: number 2
+* Return: nothing
+*/
+void multiply(char *a, char *b)
+{
+	char *mul, *start, *stop;
+        int i, j, k, l1, l2, t;
+
+        mul = NULL;
+        k = 0;
+
+	l1 = myStrlen(a);
+        l2 = myStrlen(b);
+        mul = malloc((l1 + l2) * sizeof(char));
+        if (!mul)
+        {
+                myPrint("Error");
+                exit(98);;
+        }
+        for (i = 0; i < (l1 + l2); i++)
+                mul[i] = '0';
+        start = l1 > l2 ? a : b;
+        stop = l1 > l2 ? b : a;
+
+        for (i = (l1 > l2 ? l2 : l1) - 1; i >= 0; i--)
+        {
+                for (j = (l1 > l2 ? l1 : l2) - 1; j >= 0; j--)
+                {
+                        t = (stop[i] - '0') * (start[j] - '0');
+                        t += (mul[(i + j + 1)] - '0') + k;
+                        k = t / 10;
+                        mul[(i + j + 1)] = (t % 10) + '0';
+                }
+                if (k != 0)
+                        mul[i] = k + '0';
+                k = 0;
+        }
+        for (i = 0; mul[i] == '0' && mul[i + 1] != '\0'; i++)
+                ;
+        myPrint(mul + i);
+}
+
+/**
 * main - entry point
 * @argc: no of args
 * @argv: pointers
@@ -62,44 +107,11 @@ void myPrint(char *s)
 */
 int main(int argc, char **argv)
 {
-	char *mul, *start, *stop;
-	int i, j, k, l1, l2, t;
-
-	mul = NULL;
-	k = 0;
 	if (argc != 3 || isDigit(argv[1]) != 0 || isDigit(argv[2]) != 0)
 	{
 		myPrint("Error");
 		exit(98);
 	}
-	l1 = myStrlen(argv[1]);
-	l2 = myStrlen(argv[2]);
-	mul = malloc((l1 + l2) * sizeof(char));
-	if (!mul)
-	{
-		myPrint("Error");
-		exit(98);;
-	}
-	for (i = 0; i < (l1 + l2); i++)
-		mul[i] = '0';
-	start = l1 > l2 ? argv[1] : argv[2];
-	stop = l1 > l2 ? argv[2] : argv[1];
-
-	for (i = (l1 > l2 ? l2 : l1) - 1; i >= 0; i--)
-	{
-		for (j = (l1 > l2 ? l1 : l2) - 1; j >= 0; j--)
-		{
-			t = (stop[i] - '0') * (start[j] - '0');
-			t += (mul[(i + j + 1)] - '0') + k;
-			k = t / 10;
-			mul[(i + j + 1)] = (t % 10) + '0';
-		}
-		if (k != 0)
-			mul[i] = k + '0';
-		k = 0;
-	}
-	for (i = 0; mul[i] == '0' && mul[i + 1] != '\0'; i++)
-		;
-	myPrint(mul + i);
+	multiply(argv[1], argv[2]);
 	return (0);
 }
