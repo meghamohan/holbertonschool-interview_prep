@@ -9,7 +9,7 @@ function movieCharacters (url, movieId) {
       console.log(error);
     } else {
       const resp = JSON.parse(response.body);
-      url = resp.next; //response in the next page
+      url = resp.next; /*response in the next page*/
       let characters = resp.results;
       characters.forEach(function (character) {
         const movies = character.films;
@@ -20,7 +20,7 @@ function movieCharacters (url, movieId) {
         });
       });
     }
-    if (url) { //print only if page isnt null
+    if (url) { /*print only if page isnt null*/
       movieCharacters(url, movieId);
     }
   });
